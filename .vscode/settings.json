@@ -1,0 +1,4 @@
+{
+    "symfony-vscode.phpExecutablePath": "C:\\xampp\\php\\php.exe",
+    "files.associations": { "*.module": "php" },
+}
