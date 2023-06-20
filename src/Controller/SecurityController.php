@@ -7,17 +7,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class LoginController extends AbstractController
+class SecurityController extends AbstractController
 {
-    #[Route('/login', name: 'app_login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/login', name: 'login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('login/index.html.twig', [
+        return $this->render('@EasyAdmin/page/login.html.twig', [
+            'error' => $error,
             'last_username' => $lastUsername,
-            'error'         => $error,
+            'csrf_token_intention' => 'authenticate',
+            'remember_me_enabled' => true,
+            'remember_me_checked' => true,
         ]);
     }
 }
